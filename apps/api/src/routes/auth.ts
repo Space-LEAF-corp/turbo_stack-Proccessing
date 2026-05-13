@@ -1,5 +1,6 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
+import { randomUUID } from 'crypto';
 
 const router = express.Router();
 
@@ -17,7 +18,7 @@ router.post('/signup', async (req, res) => {
 
   const hashedPassword = await bcrypt.hash(password, 10);
   const user = {
-    id: Math.random().toString(36).substring(7),
+    id: randomUUID(),
     email,
     password: hashedPassword,
   };
